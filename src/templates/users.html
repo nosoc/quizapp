@@ -1,0 +1,35 @@
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>Список пользователей</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+    rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"
+    rel="stylesheet">
+  </head>
+
+   <body>
+        <div class="container">
+            <a href="/">На главную</a>
+            <h3>Список пользователей</h3>
+            <table class="table">
+                <thead>
+                    <th>Имя</th>
+                    <th>Полное имя</th>
+                </thead>
+                <tbody>
+                    {% for user in users %}
+                    <tr>
+                        <td><a href="/users/{{user.name}}">{{user.name}}</a></td>
+                        <td>{{user.full_name}}</td>
+                    <tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
