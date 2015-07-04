@@ -13,8 +13,30 @@ MATCHES = 'matches'
 
 ################################## MATCHES ####################################################
 
+@app.route("/matches", methods=['GET', 'POST'])
+@login_required
+def mathes_handler(user_name):
+    if request.method == 'GET':
+        pass
+    elif request.method == 'POST':
+        opponent = request.form.get('opponent', '')
+        new_match = {
+            'players': [current_user.data['name'], opponent],
+            'questions': selected_questions
+        }
+        app.db['mathhes'].insert(new_match)
+        return redirect("/matches/%s" % _id)
+    else:
+        raise RuntimeError("Only POST and GET methods are supported")
 
 
+@app.route("/matches/<match_id>", methods=['GET', 'POST'])
+@login_required
+def match_handler(match_id)
+    if request.method == 'GET':
+        pass
+    if request.method == 'POST':
+        pass
 
 ################################### USERS #####################################################
 
