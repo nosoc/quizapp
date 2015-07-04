@@ -9,7 +9,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
     <body>
-        {% if mathch.status == 'open' %}
+        {% if mathch.status == 'open' and current_user.data.id not in match,results %}
             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
@@ -39,6 +39,10 @@
         {% elif match.status == 'closed' %}
             <div class="container">
                 Статистика
+            </div>
+        {% else %}
+            <div class="container">
+                Ждём оппонента
             </div>
         {% endif %}
     </body>
