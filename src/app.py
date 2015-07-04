@@ -23,6 +23,7 @@ def mathes_handler(user_name):
 
     elif request.method == 'POST':
         opponent = request.form.get('opponent', '')
+
         filter_options['players'] = {'$in': user_name}
         all_questions = app.db[QUESTIONS].find(filter_options).all()
         selected_question = random.sample(all_questions, 5)
