@@ -28,7 +28,7 @@ def mathes_handler():
         filter_options['players'] = {'$in': [current_user.data["_id"]]}
         invitations = list(app.db[MATCHES].find(filter_options))
 
-        return str(invitations)
+        return render_template("matches.html", invitations=invitations)
     elif request.method == 'POST':
         opponent = request.form.get('opponent', '')
         all_questions = list(app.db[QUESTIONS].find())
@@ -36,6 +36,7 @@ def mathes_handler():
 
         new_match = {
             'players': [current_user.data['_id'], ObjectId(opponent)],
+            'from': current_user.data['full_name'],
             'questions': selected_question,
             'status': 'open',
             'results': {}
