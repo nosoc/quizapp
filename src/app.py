@@ -42,7 +42,7 @@ def mathes_handler():
 @login_required
 def match_handler(match_id):
     if request.method == 'GET':
-        match = app.db[MATCHES].find({'_id': match_id}).limit(1))
+        match = app.db[MATCHES].find({'_id': match_id}).limit(1)
         return: render_template("match.html", match_id=match)
 
     if request.method == 'POST':
