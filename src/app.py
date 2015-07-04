@@ -20,12 +20,14 @@ MATCHES = 'matches'
 def mathes_handler():
     if request.method == 'GET':
         filter_options = {}
-        filter_options['players'] = {'$in': user_name}
-        invitations = app.db[MATCHES].find(filter_options).all()
+        filter_options['players'] = {'$in': [current_user.data["_id"]]}
+        invitations = list(app.db[MATCHES].find(filter_options))
+
+        return str(invitations)
     elif request.method == 'POST':
         opponent = request.form.get('opponent', '')
 
-        all_questions = app.db[QUESTIONS].find().all()
+        all_questions = list(app.db[QUESTIONS].find())
         selected_question = random.sample(all_questions, 5)
 
         new_match = {
