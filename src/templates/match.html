@@ -1,4 +1,4 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,33 +8,36 @@
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script>
-            add_answer = function(ans) {
-                $('#answers').val( $('#answers').val().split(',').append(and).  )
+            var cur_answers = [];
+            var add_answer = function(ans) {
+                cur_answers = cur_answers.concat(ans);
+                $('#answers').val(cur_answers.join());
+                $("#myCarousel").carousel("next");
             };
         </script>
     </head>
     <body>
-        {% if mathch.status == 'open' and current_user.data.id not in match,results %}
-            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        {% if match.status == 'open'%}
+            <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
                     {% for question in match.questions %}
-                        <div class="item">
+                        <div class="item{% if loop.index == 1%} active{% endif %}">
                             <div class="container">
                                 <div class="well">{{question.question}}</div>
                                 <div class="button-group">
-                                    <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next" onclick="add_answer('a');">
-                                        {{question.a}}
-                                    </a>
-                                    <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next" onclick="add_answer('b');">
-                                        {{question.b}}
-                                    </a>
-                                    <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next" onclick="add_answer('c');">
-                                        {{question.c}}
-                                    </a>
-                                    <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next" onclick="add_answer('d');">
-                                        {{question.d}}
-                                    </a>
+                                    <button class="btn btn-primary" onclick="add_answer('a');">
+                                        {{question.answers.a}}
+                                    </button>
+                                    <button class="btn btn-primary" onclick="add_answer('b');">
+                                        {{question.answers.b}}
+                                    </button>
+                                    <button class="btn btn-primary" onclick="add_answer('c');">
+                                        {{question.answers.c}}
+                                    </button>
+                                    <button class="btn btn-primary" onclick="add_answer('d');">
+                                        {{question.answers.d}}
+                                    </button>
                                 </div>
                             </div>
                         </div>
