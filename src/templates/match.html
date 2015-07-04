@@ -34,6 +34,13 @@
                             </div>
                         </div>
                     {% endfor%}
+                        <div class="item">
+                            <!-- Submit results -->
+                            <form role="form" action="/matches/{{match._id}}" method="post">
+                                <input type="hidden" name="abswers" value="">
+                                <button type="submit" >Закончить</button>
+                            </form>
+                        </div>
                 </div>
             </div>
         {% elif match.status == 'closed' %}

@@ -101,6 +101,7 @@ def edit_user(user_name):
     user = app.db['users'].find({'name': user_name}).limit(1)[0]
     return render_template("edit_user.html", user=user)
 
+
 ################################### LOGIN SYSTEM ##############################################
 
 @app.route("/login", methods = ['GET', 'POST'])
