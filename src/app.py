@@ -33,6 +33,7 @@ def mathes_handler():
             'players': [current_user.data['_id'], ObjectId(opponent)],
             'questions': selected_question,
             'status': 'open',
+            'results': {}
         }
         app.db[MATCHES].insert(new_match)
         return redirect("/matches/%s" % new_match['_id'])
@@ -46,8 +47,16 @@ def match_handler(match_id):
         return render_template("match.html", match=match)
 
     if request.method == 'POST':
-        # finish the match
-        pass
+
+        match = app.db[MATCHES].get(ObjectId(match_id))
+        answers = request.form.get('answers', '')
+        match.results[current_user.data["_id"]]["answers"] = split(answers, ",")
+        score = 0
+        for answer in answers:
+            if answer == "a":
+                score = score + 1
+
+        match.results[current_user.data["_id"]]["score"] = score
 
 ################################### USERS #####################################################
 
