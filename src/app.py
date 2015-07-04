@@ -26,7 +26,6 @@ def mathes_handler():
         return str(invitations)
     elif request.method == 'POST':
         opponent = request.form.get('opponent', '')
-
         all_questions = list(app.db[QUESTIONS].find())
         selected_question = random.sample(all_questions, 5)
 
