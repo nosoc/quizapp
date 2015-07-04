@@ -12,7 +12,7 @@
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
           <!-- Wrapper for slides -->
           <div class="carousel-inner" role="listbox">
-              {% for question in selected_questions %}
+              {% for question in match.questions %}
             <div class="item">
                 <div class="container">
                     <div class="well">{{question.question}}</div>
