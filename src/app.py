@@ -3,6 +3,8 @@ from flask_login import (login_required, current_user, logout_user, login_user)
 from bson import ObjectId
 from pymongo import MongoClient
 import login_system
+import random
+
 app = Flask(__name__)
 
 DATABASE_NAME = 'summertime_webness'
@@ -21,8 +23,9 @@ def mathes_handler(user_name):
         pass
     elif request.method == 'POST':
         opponent = request.form.get('opponent', '')
-        selected_question = []
-        # select questions from
+        all_questions = app.db[QUESTIONS].find().all()
+        selected_question = random.sample(all_questions, 5)
+
         new_match = {
             'players': [current_user.data['_id'], ObjectId(opponent)],
             'questions': selected_question,
