@@ -19,11 +19,12 @@ MATCHES = 'matches'
 @login_required
 def mathes_handler(user_name):
     if request.method == 'GET':
-        # Get the list of matches from db
-        pass
+        invitations = app.db[MATCHES].find({'players' == user_name}).all()
+
     elif request.method == 'POST':
         opponent = request.form.get('opponent', '')
-        all_questions = app.db[QUESTIONS].find().all()
+        filter_options['players'] = {'$in': user_name}
+        all_questions = app.db[QUESTIONS].find(filter_options).all()
         selected_question = random.sample(all_questions, 5)
 
         new_match = {
