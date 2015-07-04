@@ -63,7 +63,7 @@ def match_handler(match_id):
                 score = score + 1
         match['results'][cur_user]["score"] = score
         if len(match['results']) == 2:
-            match.status = "closed"
+            match['status'] = "closed"
         app.db[MATCHES].save(match)
         return redirect("/matches/%s" % match_id)
 
