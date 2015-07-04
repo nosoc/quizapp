@@ -10,9 +10,9 @@
           <nav class="navbar navbar-default navbar-static-top">
                 <div class="container">
                     {% if current_user and current_user.is_authenticated() %}
-                        Вы вошли как {{current_user.data.full_name}} <a href="/logout" class="btn navbar-btn">Выход</a>
+                        Вы вошли как {{current_user.data.full_name}} <a href="/logout" class="btn navbar-btn">Выйти</a>
                     {% else %}
-                        <a href="/login" class="btn btn-primary navbar-btn">Вход</a>
+                        <a href="/login" class="btn btn-primary navbar-btn">Войти</a>
                     {% endif %}
                 </div>
           </nav>
