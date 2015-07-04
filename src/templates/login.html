@@ -1,0 +1,29 @@
+ml>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Вход в систему</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    </head>
+    <body>
+        <div class="container">
+            <a href="/">На главную</a>
+            {% if error %}
+                <div class="alert alert-danger" role="alert">Неверное имя пользователя или пароль</div>
+            {% endif %}
+            <form role="form" class="form-inline" action="/login" method="POST" >
+                <input type="hidden" name="next_page", value="{{next_page}}">
+                <div class="form-group">
+                    <label for="name">Имя</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="password">Пароль</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <button type="submit" class="btn btn-success">Войти</button>
+            </form>
+        </div>
+    </body>
+</html>
