@@ -17,7 +17,7 @@
         </script>
     </head>
     <body>
-        {% if match.status == 'open'%}
+        {% if match.status == 'open' and current_user.data['_id'].__str__() not in match.results %}
             <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
@@ -45,7 +45,7 @@
                         <div class="item">
                             <!-- Submit results -->
                             <form role="form" action="/matches/{{match._id}}" method="post">
-                                <input type="hidden" name="abswers" id="answers" value="">
+                                <input type="hidden" name="answers" id="answers" value="">
                                 <button type="submit" >Закончить</button>
                             </form>
                         </div>

@@ -47,19 +47,20 @@ def match_handler(match_id):
         return render_template("match.html", match=match)
 
     if request.method == 'POST':
+        cur_user = str(current_user.data["_id"])
         match = app.db[MATCHES].find_one(ObjectId(match_id))
         answers = request.form.get('answers', '')
-        match.results[current_user.data["_id"]]["answers"] = answers.split(",")
+        answers = answers.split(',')
+        match['results'][cur_user] = {"answers": answers}
         score = 0
-        for answer in answers:
-            if answer == "a":
+        for answer, question in zip(answers, match['questions']):
+            if answer == question['correct_answer']:
                 score = score + 1
-
-        match.results[current_user.data["_id"]]["score"] = score
-        if len(match.results) == 2:
+        match['results'][cur_user]["score"] = score
+        if len(match['results']) == 2:
             match.status = "closed"
         app.db[MATCHES].save(match)
-        return redirect("/matches/<match_id>")
+        return redirect("/matches/%s" % match_id)
 
 ################################### USERS #####################################################
 
