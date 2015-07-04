@@ -10,28 +10,28 @@
     </head>
     <body>
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
-          <!-- Wrapper for slides -->
-          <div class="carousel-inner" role="listbox">
-              {% for question in match.questions %}
-            <div class="item">
-                <div class="container">
-                    <div class="well">{{question.question}}</div>
-                    <div class="button-group">
-                        <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next">
-                            {{question.a}}
-                        </a>
-                        <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next">
-                            {{question.b}}
-                        </a>
-                        <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next">
-                            {{question.c}}
-                        </a>
-                        <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next">
-                            {{question.d}}
-                        </a>
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+                {% for question in match.questions %}
+                    <div class="item">
+                    <div class="container">
+                        <div class="well">{{question.question}}</div>
+                        <div class="button-group">
+                            <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next">
+                                {{question.a}}
+                            </a>
+                            <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next">
+                                {{question.b}}
+                            </a>
+                            <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next">
+                                {{question.c}}
+                            </a>
+                            <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next">
+                                {{question.d}}
+                            </a>
+                        </div>
                     </div>
-                </div>
-            {% endfor%}
+                {% endfor%}
             </div>
         </div>
     </body>
