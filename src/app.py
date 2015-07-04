@@ -49,7 +49,13 @@ def mathes_handler():
 def match_handler(match_id):
     if request.method == 'GET':
         match = app.db[MATCHES].find_one(ObjectId(match_id))
-        return render_template("match.html", match=match)
+        users = dict([(str(user['_id']), user) for user in app.db[USERS].find({'_id': {'$in': match['players']}})])
+        return render_template(
+            "match.html",
+            match=match,
+            cur_user = str(current_user.data['_id']),
+            players = users
+        )
 
     if request.method == 'POST':
         cur_user = str(current_user.data["_id"])
