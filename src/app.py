@@ -1,5 +1,6 @@
 from flask import (Flask, redirect, render_template, request)
 from flask_login import (login_required, current_user, logout_user, login_user)
+from bson import ObjectId
 from pymongo import MongoClient
 import login_system
 app = Flask(__name__)
@@ -10,32 +11,35 @@ USERS = 'users'
 QUESTIONS = 'questions'
 MATCHES = 'matches'
 
-
 ################################## MATCHES ####################################################
 
 @app.route("/matches", methods=['GET', 'POST'])
 @login_required
 def mathes_handler(user_name):
     if request.method == 'GET':
+        # Get the list of matches from db
         pass
     elif request.method == 'POST':
         opponent = request.form.get('opponent', '')
+        selected_question = []
+        # select questions from
         new_match = {
-            'players': [current_user.data['name'], opponent],
-            'questions': selected_questions
+            'players': [current_user.data['_id'], ObjectId(opponent)],
+            'questions': selected_question,
+            'status': 'open',
         }
-        app.db['mathhes'].insert(new_match)
-        return redirect("/matches/%s" % _id)
-    else:
-        raise RuntimeError("Only POST and GET methods are supported")
+        app.db[MATCHES].insert(new_match)
+        return redirect("/matches/%s" % new_match['_id'])
 
 
 @app.route("/matches/<match_id>", methods=['GET', 'POST'])
 @login_required
-def match_handler(match_id)
+def match_handler(match_id):
     if request.method == 'GET':
+        # get match questions
         pass
     if request.method == 'POST':
+        # finish the match
         pass
 
 ################################### USERS #####################################################
