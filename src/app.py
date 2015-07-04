@@ -47,7 +47,6 @@ def match_handler(match_id):
         return render_template("match.html", match=match)
 
     if request.method == 'POST':
-
         match = app.db[MATCHES].get(ObjectId(match_id))
         answers = request.form.get('answers', '')
         match.results[current_user.data["_id"]]["answers"] = split(answers, ",")
@@ -57,6 +56,10 @@ def match_handler(match_id):
                 score = score + 1
 
         match.results[current_user.data["_id"]]["score"] = score
+        if len(results) == 2:
+            match.status = "closed"
+        app.db[MATCHES].save(match)
+        return redirect("/matches/<match_id>")
 
 ################################### USERS #####################################################
 
