@@ -7,6 +7,11 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+        <script>
+            add_answer = function(ans) {
+                $('#answers').val( $('#answers').val().split(',').append(and).  )
+            };
+        </script>
     </head>
     <body>
         {% if mathch.status == 'open' and current_user.data.id not in match,results %}
@@ -18,16 +23,16 @@
                             <div class="container">
                                 <div class="well">{{question.question}}</div>
                                 <div class="button-group">
-                                    <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next">
+                                    <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next" onclick="add_answer('a');">
                                         {{question.a}}
                                     </a>
-                                    <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next">
+                                    <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next" onclick="add_answer('b');">
                                         {{question.b}}
                                     </a>
-                                    <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next">
+                                    <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next" onclick="add_answer('c');">
                                         {{question.c}}
                                     </a>
-                                    <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next">
+                                    <a class="btn btn-primary" href="#myCarousel" role="button" data-slide="next" onclick="add_answer('d');">
                                         {{question.d}}
                                     </a>
                                 </div>
@@ -37,7 +42,7 @@
                         <div class="item">
                             <!-- Submit results -->
                             <form role="form" action="/matches/{{match._id}}" method="post">
-                                <input type="hidden" name="abswers" value="">
+                                <input type="hidden" name="abswers" id="answers" value="">
                                 <button type="submit" >Закончить</button>
                             </form>
                         </div>
