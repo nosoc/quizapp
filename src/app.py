@@ -13,6 +13,11 @@ USERS = 'users'
 QUESTIONS = 'questions'
 MATCHES = 'matches'
 
+@app.route("/")
+def index():
+    return render_template("index.html")
+
+
 ################################## MATCHES ####################################################
 
 @app.route("/matches", methods=['GET', 'POST'])
