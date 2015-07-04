@@ -17,7 +17,7 @@
         </script>
     </head>
     <body>
-        {% if match.status == 'open' and current_user.data['_id'].__str__() not in match.results %}
+        {% if match.status == 'open' and cur_user not in match.results %}
             <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
@@ -46,14 +46,16 @@
                             <!-- Submit results -->
                             <form role="form" action="/matches/{{match._id}}" method="post">
                                 <input type="hidden" name="answers" id="answers" value="">
-                                <button type="submit" >Закончить</button>
+                                <button class="btn btn-success" type="submit" >Закончить</button>
                             </form>
                         </div>
                 </div>
             </div>
         {% elif match.status == 'closed' %}
             <div class="container">
-                Статистика
+                {% for user_id, result in match.results.items() %}
+                    {{players[user_id]['name']}}: {{result.score}}
+                {% endfor %}
             </div>
         {% else %}
             <div class="container">
