@@ -16,5 +16,11 @@
                     {% endif %}
                 </div>
           </nav>
+
+        <div>
+             {% if current_user and current_user.is_authenticated() %}
+                <a href="/matches" class="btn btn-success">Ваши матчи</a>
+             {% endif %}
+        </div>
     </body>
 </html>
