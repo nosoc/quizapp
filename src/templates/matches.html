@@ -7,11 +7,24 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     </head>
     <body>
+         <nav class="navbar navbar-default navbar-static-top">
+                <div class="container">
+                    {% if current_user and current_user.is_authenticated() %}
+                        Вы вошли как {{current_user.data.full_name}} <a href="/logout" class="btn navbar-btn">Выйти</a>
+                    {% else %}
+                        <a href="/login" class="btn btn-primary navbar-btn">Войти</a>
+                    {% endif %}
+                </div>
+          </nav>
         <div>
             <li>
                 {% for match in invitations %}
                 <div>
-                     <a href="/matches/{{match._id}}">{{match.from}}</a>
+                    {% if match.players[0] == current_user.data._id %}
+                     <a href="/matches/{{match._id}}">{{match.players_names[1]}}</a>
+                    {% else %}
+                        <a href="/matches/{{match._id}}">{{match.players_names[0]}}</a>
+                    {% endif %}
                 </div>
 
                 {% endfor %}

@@ -36,7 +36,7 @@ def mathes_handler():
 
         new_match = {
             'players': [current_user.data['_id'], ObjectId(opponent)],
-            'from': current_user.data['full_name'],
+            'players_names': [current_user.data['name'], opponent],
             'questions': selected_question,
             'status': 'open',
             'results': {}
