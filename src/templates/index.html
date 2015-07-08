@@ -5,9 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>My web app</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <style> body{color: white;
+            background: url(http://www.pendulumarts.com/images/5music.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            }
+        </style>
     </head>
     <body>
-          <nav class="navbar navbar-default navbar-static-top">
+          <nav class="navbar navbar-default navbar-static-top"  style="background-color:rgba(0, 0, 0, 0.7);">
                 <div class="container">
                     {% if current_user and current_user.is_authenticated() %}
                         Вы вошли как {{current_user.data.full_name}} <a href="/logout" class="btn navbar-btn">Выйти</a>
@@ -17,10 +25,13 @@
                 </div>
           </nav>
 
-        <div>
+        <div style="margin: 5% 20%; font-family: Century Gothic; ">
+            <p style=" font-size: 400%; background-color: rgba(0, 0, 0, 0.7);">Музыкальная викторина</p>
+            <p  style="font-size: 200%; background-color: rgba(0, 0, 0, 0.7);">Здесь вы сможете показать всем свои глубочайшие познания музыки!</p>
              {% if current_user and current_user.is_authenticated() %}
-                <a href="/users" class="btn btn-success">Выбрать противника!</a>
-                <a href="/matches" class="btn btn-success">Ваши матчи</a>
+                <a style="background-color: rgba(0, 0, 0, 0.7); font-size: 250%; " href="/users" class="btn btn-large btn-block btn-info">Выбрать противника!</a style="background-color: #000000 0.3;">
+                <br>
+                <a style="background-color: rgba(0, 0, 0, 0.7); font-size: 250%; " href="/matches" class="btn btn-large btn-block btn-info">Ваши матчи</a>
              {% endif %}
         </div>
     </body>
