@@ -33,10 +33,11 @@ def mathes_handler():
         opponent = request.form.get('opponent', '')
         all_questions = list(app.db[QUESTIONS].find())
         selected_question = random.sample(all_questions, 5)
+        opponent_name = app.db[USERS].find_one(ObjectId(opponent))
 
         new_match = {
             'players': [current_user.data['_id'], ObjectId(opponent)],
-            'players_names': [current_user.data['name'], opponent],
+            'players_names': [current_user.data['name'], opponent_name['name']],
             'questions': selected_question,
             'status': 'open',
             'results': {}
