@@ -10,7 +10,7 @@ questions_dict = []
 for index, row in questions.iterrows():
     d = {'question': row["lyrics"],
          'answers': {'a': row["artist_true"], 'b': row["artist_false_1"],
-         'c': row["artist_false_2"], 'd': row["artist_false_3"]}, 'correct_answer': 'a'}
+         'c': row["artist_false_2"], 'd': row["artist_false_3"]}, 'correct_answer': row["correct"]}}
     questions_dict.append(d)
 
 db = MongoClient('wardoctor.nosoc.io', port=443)[DATABASE_NAME]
