@@ -15,8 +15,18 @@
                 $("#myCarousel").carousel("next");
             };
         </script>
+        <style> body{font-family: Century Gothic;
+            background: url(http://www.pendulumarts.com/images/5music.jpg) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            }
+            h1{background-color: rgba(0, 0, 0, 0.7); font-size:400%; color: #E6F0FF; margin: 5% 10%;}
+        </style>
     </head>
     <body>
+        <h1>В чьей песне есть эта строчка?</h1>
         {% if match.status == 'open' and cur_user not in match.results %}
             <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="false">
                 <!-- Wrapper for slides -->
@@ -24,47 +34,59 @@
                     {% for question in match.questions %}
                         <div class="item{% if loop.index == 1%} active{% endif %}">
                             <div class="container">
-                                <div class="well">{{question.question}}</div>
+                                <div style ="background-color: rgba(0, 0, 0, 0.9); font-size:200%; color: white;" class="well">{{question.question}}</div>
                                 <div class="button-group">
-                                    <button class="btn btn-primary" onclick="add_answer('a');">
+                                    <button style="background-color: rgba(0, 0, 0, 0.9); font-size:120%; color: white;"  class="btn btn-default" onclick="add_answer('a');">
                                         {{question.answers.a}}
                                     </button>
-                                    <button class="btn btn-primary" onclick="add_answer('b');">
+                                    <button style="background-color: rgba(0, 0, 0, 0.9); font-size:120%; color: white;"  class="btn btn-default" onclick="add_answer('b');">
                                         {{question.answers.b}}
                                     </button>
-                                    <button class="btn btn-primary" onclick="add_answer('c');">
+                                    <button style="background-color: rgba(0, 0, 0, 0.9); font-size:120%; color: white;"  class="btn btn-default" onclick="add_answer('c');">
                                         {{question.answers.c}}
                                     </button>
-                                    <button class="btn btn-primary" onclick="add_answer('d');">
+                                    <button style="background-color: rgba(0, 0, 0, 0.9); font-size:120%; color: white;"  class="btn btn-default" onclick="add_answer('d');">
                                         {{question.answers.d}}
                                     </button>
                                 </div>
                             </div>
                         </div>
                     {% endfor%}
-                        <div class="item">
+                        <div style="margin: 1% 15%;" class="item">
                             <!-- Submit results -->
                             <form role="form" action="/matches/{{match._id}}" method="post">
                                 <input type="hidden" name="answers" id="answers" value="">
-                                <button class="btn btn-success" type="submit" >Закончить</button>
+                                <button style=" background-color: rgba(0, 0, 0, 0.7); font-size: 250%; color: white;" class="btn btn-large btn-block btn-default" type="submit" >Закончить</button>
                             </form>
                         </div>
                 </div>
             </div>
         {% elif match.status == 'closed' %}
             <div class="container">
+
+                {% elif match.results.score[0] > match.results.score[1] %}
+                    <p style=" background-color: rgba(0, 0, 0, 0.7); font-size: 200%; color: white;">Победитель {{players[user_id]['full_name'][0}}!</p>
+
+                {% else match.results.score[0] < match.results.score[1] %}
+                    <p style=" background-color: rgba(0, 0, 0, 0.7); font-size: 200%; color: white;">Победитель {{players[user_id]['full_name'][1}}!</p>
+
+                {% endif %}
+                    <p style=" background-color: rgba(0, 0, 0, 0.7); font-size: 200%; color: white;">Победила дружба!</p>
+
+
                 {% for user_id, result in match.results.items() %}
-                    {{players[user_id]['full_name']}}: {{result.score}}
+                    <p style=" background-color: rgba(0, 0, 0, 0.7); font-size: 120%; color: white;">{{players[user_id]['full_name']}}: {{result.score}}</p>
+                    <br>
 
                 {% endfor %}
                 <br>
-                <a href="/" class="btn btn-success">На главную</a>
+                <a style="background-color: rgba(0, 0, 0, 0.7); font-size:120%; color: white;" href="/" class="btn btn-default ">На главную</a>
             </div>
         {% else %}
-            <div class="container">
-                Ждём оппонента
+            <div  class="container">
+                <p style=" background-color: rgba(0, 0, 0, 0.7); font-size: 250%; color: white;">Ждём оппонента</p>
                 <br>
-                <a href="/" class="btn btn-success">На главную</a>
+                <a style="background-color: rgba(0, 0, 0, 0.7); font-size:120%; color: white;" href="/" class="btn btn-default ">На главную</a>
             </div>
         {% endif %}
     </body>
