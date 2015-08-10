@@ -63,17 +63,6 @@
             </div>
         {% elif match.status == 'closed' %}
             <div class="container">
-
-                {% elif match.results.score[0] > match.results.score[1] %}
-                    <p style=" background-color: rgba(0, 0, 0, 0.7); font-size: 200%; color: white;">Победитель {{players[user_id]['full_name'][0}}!</p>
-
-                {% else match.results.score[0] < match.results.score[1] %}
-                    <p style=" background-color: rgba(0, 0, 0, 0.7); font-size: 200%; color: white;">Победитель {{players[user_id]['full_name'][1}}!</p>
-
-                {% endif %}
-                    <p style=" background-color: rgba(0, 0, 0, 0.7); font-size: 200%; color: white;">Победила дружба!</p>
-
-
                 {% for user_id, result in match.results.items() %}
                     <p style=" background-color: rgba(0, 0, 0, 0.7); font-size: 120%; color: white;">{{players[user_id]['full_name']}}: {{result.score}}</p>
                     <br>
