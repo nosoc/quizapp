@@ -40,7 +40,8 @@ def mathes_handler():
             'players_names': [current_user.data['full_name'], opponent_name['full_name']],
             'questions': selected_question,
             'status': 'open',
-            'results': {}
+            'results': {},
+            'winner': []
         }
         app.db[MATCHES].insert(new_match)
         return redirect("/matches/%s" % new_match['_id'])
@@ -72,6 +73,12 @@ def match_handler(match_id):
         match['results'][cur_user]["score"] = score
         if len(match['results']) == 2:
             match['status'] = "closed"
+            if match['results'][str(match["players"][0])]["score"] > match['results'][str(match["players"][1])]["score"]:
+                match["winner"] = match["players_names"][0]
+            elif match['results'][str(match["players"][0])]["score"] < match['results'][str(match["players"][1])]["score"]:
+                match["winner"] = match["players_names"][1]
+            else:
+                match["winner"] = "не определён. Сыграйте ещё раз"
         app.db[MATCHES].save(match)
         return redirect("/matches/%s" % match_id)
 
