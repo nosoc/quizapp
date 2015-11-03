@@ -3,6 +3,7 @@ from pymongo import MongoClient
 
 DATABASE_NAME = "summertime_webness"
 
+
 questions = pandas.read_csv("C:/Users/1/Desktop/quiz_questions.csv", sep=",", encoding="UTF-8")
 
 questions_dict = []

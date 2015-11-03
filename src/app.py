@@ -162,3 +162,20 @@ if __name__ == "__main__":
     app.db = MongoClient('wardoctor.nosoc.io', port=443)[DATABASE_NAME]
     login_system.init_login_system(app)
     app.run(debug=True)
+
+######### CROWDSOURCING THING ######
+
+@app.route("/do_you_know", methods=['GET', 'POST'])
+def song_handler():
+    if request.method == 'GET':
+        song = random.sample(list(app.db[songs].find()), 1)
+        new_game= {
+            'songs ': song,
+            'tags': {}
+        }
+        app.db[tagged].insert(new_game)
+        return render_template("do_you_know.html", game=new_game)
+    if request.method == 'POST':
+
+        tags = request.form.get(tags)
+        return redirect("/do_you_know")
